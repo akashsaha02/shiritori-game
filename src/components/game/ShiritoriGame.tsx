@@ -1,11 +1,11 @@
-import { useState, useCallback, useEffect } from 'react';
-import { PlayerCard } from './PlayerCard';
-import { WordInput } from './WordInput';
-import { WordHistory } from './WordHistory';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { validateWord } from '@/services/dictionaryService';
-import { useToast } from '@/hooks/use-toast';
+import { useState, useCallback, useEffect } from "react";
+import { PlayerCard } from "./PlayerCard";
+import { WordInput } from "./WordInput";
+import { WordHistory } from "./WordHistory";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { validateWord } from "@/services/dictionaryService";
+import { useToast } from "@/hooks/use-toast";
 
 interface Player {
   name: string;
@@ -27,18 +27,22 @@ interface ShiritoriGameProps {
   onRestart: () => void;
 }
 
-export const ShiritoriGame = ({ player1Name, player2Name, onRestart }: ShiritoriGameProps) => {
+export const ShiritoriGame = ({
+  player1Name,
+  player2Name,
+  onRestart,
+}: ShiritoriGameProps) => {
   const [players, setPlayers] = useState<[Player, Player]>([
     { name: player1Name, score: 0 },
-    { name: player2Name, score: 0 }
+    { name: player2Name, score: 0 },
   ]);
   const [currentPlayer, setCurrentPlayer] = useState<0 | 1>(0);
   const [wordHistory, setWordHistory] = useState<WordEntry[]>([]);
   const [usedWords, setUsedWords] = useState<Set<string>>(new Set());
   const [isValidating, setIsValidating] = useState(false);
   const [gameEnded, setGameEnded] = useState(false);
-  const [lastLetter, setLastLetter] = useState<string>('');
-  
+  const [lastLetter, setLastLetter] = useState<string>("");
+
   const { toast } = useToast();
 
   const getExpectedFirstLetter = () => {
@@ -48,16 +52,19 @@ export const ShiritoriGame = ({ player1Name, player2Name, onRestart }: Shiritori
 
   const handleTimeUp = useCallback(() => {
     if (gameEnded) return;
-    
+
     toast({
       title: "Time's up!",
       description: `${players[currentPlayer].name} loses a point for running out of time.`,
       variant: "destructive",
     });
 
-    setPlayers(prev => {
+    setPlayers((prev) => {
       const newPlayers = [...prev] as [Player, Player];
-      newPlayers[currentPlayer].score = Math.max(0, newPlayers[currentPlayer].score - 1);
+      newPlayers[currentPlayer].score = Math.max(
+        0,
+        newPlayers[currentPlayer].score - 1
+      );
       return newPlayers;
     });
 
@@ -65,10 +72,12 @@ export const ShiritoriGame = ({ player1Name, player2Name, onRestart }: Shiritori
   }, [currentPlayer, players, gameEnded, toast]);
 
   const switchPlayer = () => {
-    setCurrentPlayer(prev => prev === 0 ? 1 : 0);
+    setCurrentPlayer((prev) => (prev === 0 ? 1 : 0));
   };
 
-  const validateWordStructure = (word: string): { isValid: boolean; error?: string } => {
+  const validateWordStructure = (
+    word: string
+  ): { isValid: boolean; error?: string } => {
     if (word.length < 4) {
       return { isValid: false, error: "Word must be at least 4 letters long" };
     }
@@ -79,7 +88,10 @@ export const ShiritoriGame = ({ player1Name, player2Name, onRestart }: Shiritori
 
     const expectedLetter = getExpectedFirstLetter();
     if (expectedLetter && !word.startsWith(expectedLetter.toLowerCase())) {
-      return { isValid: false, error: `Word must start with "${expectedLetter.toUpperCase()}"` };
+      return {
+        isValid: false,
+        error: `Word must start with "${expectedLetter.toUpperCase()}"`,
+      };
     }
 
     return { isValid: true };
@@ -109,10 +121,13 @@ export const ShiritoriGame = ({ player1Name, player2Name, onRestart }: Shiritori
           timestamp: new Date(),
         };
 
-        setWordHistory(prev => [wordEntry, ...prev]);
-        setPlayers(prev => {
+        setWordHistory((prev) => [wordEntry, ...prev]);
+        setPlayers((prev) => {
           const newPlayers = [...prev] as [Player, Player];
-          newPlayers[currentPlayer].score = Math.max(0, newPlayers[currentPlayer].score - 1);
+          newPlayers[currentPlayer].score = Math.max(
+            0,
+            newPlayers[currentPlayer].score - 1
+          );
           return newPlayers;
         });
 
@@ -133,14 +148,14 @@ export const ShiritoriGame = ({ player1Name, player2Name, onRestart }: Shiritori
         timestamp: new Date(),
       };
 
-      setWordHistory(prev => [wordEntry, ...prev]);
+      setWordHistory((prev) => [wordEntry, ...prev]);
 
       if (isValid) {
         // Valid word - add point and update game state
-        setUsedWords(prev => new Set([...prev, word]));
+        setUsedWords((prev) => new Set([...prev, word]));
         setLastLetter(word.charAt(word.length - 1));
-        
-        setPlayers(prev => {
+
+        setPlayers((prev) => {
           const newPlayers = [...prev] as [Player, Player];
           newPlayers[currentPlayer].score += 1;
           newPlayers[currentPlayer].lastWord = word;
@@ -153,9 +168,12 @@ export const ShiritoriGame = ({ player1Name, player2Name, onRestart }: Shiritori
         });
       } else {
         // Invalid word - deduct point
-        setPlayers(prev => {
+        setPlayers((prev) => {
           const newPlayers = [...prev] as [Player, Player];
-          newPlayers[currentPlayer].score = Math.max(0, newPlayers[currentPlayer].score - 1);
+          newPlayers[currentPlayer].score = Math.max(
+            0,
+            newPlayers[currentPlayer].score - 1
+          );
           return newPlayers;
         });
 
@@ -168,7 +186,7 @@ export const ShiritoriGame = ({ player1Name, player2Name, onRestart }: Shiritori
 
       switchPlayer();
     } catch (error) {
-      console.error('Error validating word:', error);
+      console.error("Error validating word:", error);
       toast({
         title: "Error",
         description: "Failed to validate word. Please try again.",
@@ -238,7 +256,7 @@ export const ShiritoriGame = ({ player1Name, player2Name, onRestart }: Shiritori
             Next word must start with:
           </div>
           <div className="text-2xl font-bold text-accent">
-            {lastLetter ? lastLetter.toUpperCase() : 'Any letter'}
+            {lastLetter ? lastLetter.toUpperCase() : "Any letter"}
           </div>
           <div className="text-xs text-muted-foreground">
             Words used: {usedWords.size}

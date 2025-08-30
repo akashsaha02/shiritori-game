@@ -1,13 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface GameTimerProps {
   duration: number;
   isActive: boolean;
   onTimeUp: () => void;
-  playerColor: 'player-1' | 'player-2';
+  playerColor: "player-1" | "player-2";
 }
 
-export const GameTimer = ({ duration, isActive, onTimeUp, playerColor }: GameTimerProps) => {
+export const GameTimer = ({
+  duration,
+  isActive,
+  onTimeUp,
+  playerColor,
+}: GameTimerProps) => {
   const [timeLeft, setTimeLeft] = useState(duration);
 
   useEffect(() => {
@@ -18,7 +23,7 @@ export const GameTimer = ({ duration, isActive, onTimeUp, playerColor }: GameTim
     if (!isActive || timeLeft <= 0) return;
 
     const timer = setInterval(() => {
-      setTimeLeft(prev => {
+      setTimeLeft((prev) => {
         if (prev <= 1) {
           onTimeUp();
           return 0;
@@ -35,8 +40,8 @@ export const GameTimer = ({ duration, isActive, onTimeUp, playerColor }: GameTim
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
 
   const getTimerColor = () => {
-    if (timeLeft <= 5) return 'hsl(var(--destructive))';
-    if (timeLeft <= 10) return 'hsl(var(--warning))';
+    if (timeLeft <= 5) return "hsl(var(--destructive))";
+    if (timeLeft <= 10) return "hsl(var(--warning))";
     return `hsl(var(--${playerColor}))`;
   };
 
@@ -63,16 +68,19 @@ export const GameTimer = ({ duration, isActive, onTimeUp, playerColor }: GameTim
           strokeDashoffset={strokeDashoffset}
           className="transition-all duration-1000 ease-linear"
           style={{
-            filter: timeLeft <= 5 ? 'drop-shadow(0 0 8px currentColor)' : 'none'
+            filter:
+              timeLeft <= 5 ? "drop-shadow(0 0 8px currentColor)" : "none",
           }}
         />
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
-        <span 
+        <span
           className={`text-2xl font-bold transition-colors duration-300 ${
-            timeLeft <= 5 ? 'animate-pulse text-destructive' : 
-            timeLeft <= 10 ? 'text-warning' : 
-            `text-${playerColor === 'player-1' ? 'primary' : 'secondary'}`
+            timeLeft <= 5
+              ? "animate-pulse text-destructive"
+              : timeLeft <= 10
+              ? "text-warning"
+              : `text-${playerColor === "player-1" ? "primary" : "secondary"}`
           }`}
         >
           {timeLeft}

@@ -1,5 +1,5 @@
-import { Card } from '@/components/ui/card';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { Card } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface WordEntry {
   word: string;
@@ -29,15 +29,27 @@ export const WordHistory = ({ words }: WordHistoryProps) => {
                 key={index}
                 className={`
                   p-3 rounded-lg gradient-card border transition-smooth animate-word-enter
-                  ${entry.isValid ? 'border-success/20' : 'border-destructive/20'}
-                  ${entry.playerNumber === 1 ? 'border-l-4 border-l-primary' : 'border-l-4 border-l-secondary'}
+                  ${
+                    entry.isValid
+                      ? "border-success/20"
+                      : "border-destructive/20"
+                  }
+                  ${
+                    entry.playerNumber === 1
+                      ? "border-l-4 border-l-primary"
+                      : "border-l-4 border-l-secondary"
+                  }
                 `}
               >
                 <div className="flex justify-between items-center">
                   <div>
-                    <span className={`font-medium ${
-                      entry.playerNumber === 1 ? 'text-primary' : 'text-secondary'
-                    }`}>
+                    <span
+                      className={`font-medium ${
+                        entry.playerNumber === 1
+                          ? "text-primary"
+                          : "text-secondary"
+                      }`}
+                    >
                       {entry.word}
                     </span>
                     {!entry.isValid && (

@@ -1,16 +1,16 @@
-import { useState } from 'react';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
+import { useState } from "react";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 
 interface GameSetupProps {
   onStart: (player1Name: string, player2Name: string) => void;
 }
 
 export const GameSetup = ({ onStart }: GameSetupProps) => {
-  const [player1Name, setPlayer1Name] = useState('');
-  const [player2Name, setPlayer2Name] = useState('');
+  const [player1Name, setPlayer1Name] = useState("");
+  const [player2Name, setPlayer2Name] = useState("");
 
   const handleStart = () => {
     if (player1Name.trim() && player2Name.trim()) {
@@ -27,7 +27,8 @@ export const GameSetup = ({ onStart }: GameSetupProps) => {
               Shiritori
             </h1>
             <p className="text-muted-foreground">
-              Word game where each word starts with the last letter of the previous word
+              Word game where each word starts with the last letter of the
+              previous word
             </p>
           </div>
 
