@@ -200,7 +200,7 @@ export const ShiritoriGame = ({ player1Name, player2Name, onRestart }: Shiritori
           score={players[0].score}
           isActive={currentPlayer === 0}
           playerNumber={1}
-          timeLeft={30}
+          timeLeft={10}
           onTimeUp={handleTimeUp}
           lastWord={players[0].lastWord}
         />
@@ -209,7 +209,7 @@ export const ShiritoriGame = ({ player1Name, player2Name, onRestart }: Shiritori
           score={players[1].score}
           isActive={currentPlayer === 1}
           playerNumber={2}
-          timeLeft={30}
+          timeLeft={10}
           onTimeUp={handleTimeUp}
           lastWord={players[1].lastWord}
         />
