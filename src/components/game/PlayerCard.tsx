@@ -72,7 +72,7 @@ export const PlayerCard = ({
         {isActive && (
           <div
             className={`
-            absolute -bottom-2 left-1/2 transform -translate-x-1/2 
+           transform -translate-x-1/2 
             w-8 h-2 rounded-full ${gradientClass}
             animate-pulse-glow
           `}
