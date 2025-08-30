@@ -1,74 +1,97 @@
-# Welcome to your Lovable project
+# Multiplayer Shiritori Game
 
-## Project info
+A simplified two-player Shiritori Game built for the same screen, focusing on word validation, scoring, and history tracking.
 
-**URL**: https://lovable.dev/projects/5e605551-9fb4-4835-adf0-6ad16a967119
+🔗 **Shiritori Reference:** [shiritorigame.com](https://shiritorigame.com/)
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🎮 Game Overview
 
-**Use Lovable**
+**Shiritori** is a Japanese word game where:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/5e605551-9fb4-4835-adf0-6ad16a967119) and start prompting.
+* Players take turns entering words.
+* Each new word **must begin with the last letter** of the previous word.
+* Words **cannot be repeated**.
+* Words must be **valid English words**.
+* If a player fails to enter a valid word (or times out), they lose a point.
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🛠️ Tech Stack
 
-Follow these steps:
+* **Frontend:** Vite React, TypeScript, Tailwind CSS, Shadcn UI
+* **Word Validation:** [DictionaryAPI](https://dictionaryapi.dev/)
+* **Hosting:**  Vercel
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 🚀 Getting Started
 
-# Step 3: Install the necessary dependencies.
-npm i
+### 1. Clone Repository
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+https://github.com/akashsaha02/shiritori-game
+cd shiritori-game
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Run Locally
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+App will be available at: `http://localhost:5173/`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 4. Build for Production
 
-**Use GitHub Codespaces**
+```bash
+npm run build
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+---
 
-## What technologies are used for this project?
+## 🎲 Gameplay Instructions
 
-This project is built with:
+1. **Player 1 starts** by entering any valid English word (≥ 4 letters).
+2. **Player 2** must then enter a word starting with the **last letter** of Player 1's word.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+   * Example: `Apple → Eagle → Earth → ...`
+3. Words **cannot be repeated** during the game.
+4. If a player:
 
-## How can I deploy this project?
+   * Fails to enter a valid word, **they lose a point**.
+   * Runs out of time (countdown ends), **they lose a point**.
+5. Scores are updated in real-time, and word history is displayed for reference.
 
-Simply open [Lovable](https://lovable.dev/projects/5e605551-9fb4-4835-adf0-6ad16a967119) and click on Share -> Publish.
 
-## Can I connect a custom domain to my Lovable project?
+## 📑 Rules Recap
 
-Yes, you can!
+* **Valid Word Check:** via [DictionaryAPI](https://dictionaryapi.dev/)
+* **Minimum 4 letters** per word.
+* **No repetitions** allowed.
+* **Countdown timer** per turn.
+* **Points deducted** for invalid or late entries.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+---
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
-# shiritori-game
+## 🏆 Scoring System
+
+* **+1 point** → Correct valid word within time.
+* **-1 point** → Wrong word / Repeated word / Timeout.
+
+---
+
+## 📜 License
+
+This project is developed for **Nyntax Assessment**. Free to use and extend for learning purposes.
+
+
